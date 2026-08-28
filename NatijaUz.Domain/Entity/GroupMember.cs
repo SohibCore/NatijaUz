@@ -6,7 +6,7 @@ namespace NatijaUz.Domain.Entity
     public class GroupMember : BaseEntity
     {
         public long GroupId { get; set; }
-        public long StudentId { get; set; }
+        public long? StudentId { get; set; }
         public DateTime JoinedAt { get; set; }
 
         // Navigation properties

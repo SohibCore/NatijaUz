@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace NatijaUz.Infrastructure.Persistence.Configurations
 {
-    public class TestConfiguration : IEntityTypeConfiguration<Test>
+    public class SubmissionConfiguration : IEntityTypeConfiguration<Submission>
     {
-        public void Configure(EntityTypeBuilder<Test> builder)
+        public void Configure(EntityTypeBuilder<Submission> builder)
         {
-            builder.ToTable("SYS_TEST", schema: "academic");
+            builder.ToTable("SYS_SUBMISSION", schema: "submission");
 
             builder.HasKey(x => x.Id);
 
@@ -17,30 +17,41 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnName("ID")
                 .ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Title)
-                .HasColumnType("varchar(300)")
-                .HasColumnName("TITLE")
-                .HasMaxLength(300)
-                .IsRequired();
-
-            builder.Property(x => x.GroupId)
+            builder.Property(x => x.TestId)
                 .HasColumnType("bigint")
-                .HasColumnName("GROUP_ID")
+                .HasColumnName("TEST_ID")
                 .IsRequired();
 
-            builder.Property(x => x.QuestionCount)
-                .HasColumnType("integer")
-                .HasColumnName("QUESTION_COUNT")
+            builder.Property(x => x.StudentId)
+                .HasColumnType("bigint")
+                .HasColumnName("STUDENT_ID")
+                .IsRequired(false);
+
+            builder.Property(x => x.ImageUrl)
+                .HasColumnType("text")
+                .HasColumnName("IMAGE_URL")
                 .IsRequired();
 
-            builder.Property(x => x.Deadline)
+            builder.Property(x => x.Status)
+                .HasColumnType("text")
+                .HasColumnName("STATUS")
+                .HasConversion<string>()
+                .IsRequired();
+
+            builder.Property(x => x.SubmittedAt)
                 .HasColumnType("timestamp with time zone")
-                .HasColumnName("DEADLINE")
+                .HasColumnName("SUBMITTED_AT")
                 .IsRequired();
 
-            builder.Property(x => x.IsActive)
-                .HasColumnType("boolean")
-                .HasColumnName("IS_ACTIVE");
+            builder.Property(x => x.CorrectCount)
+                .HasColumnType("integer")
+                .HasColumnName("CORRECT_COUNT")
+                .IsRequired(false);
+
+            builder.Property(x => x.TotalScore)
+                .HasColumnType("numeric")
+                .HasColumnName("TOTAL_SCORE")
+                .IsRequired(false);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("timestamp with time zone")
@@ -61,21 +72,6 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnType("bigint")
                 .HasColumnName("MODIFIED_USER_ID")
                 .IsRequired(false);
-
-            builder.HasOne(x => x.Group)
-                .WithMany(x => x.Tests)
-                .HasForeignKey(x => x.GroupId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(x => x.AnswerKeys)
-                .WithOne(x => x.Test)
-                .HasForeignKey(x => x.TestId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(x => x.Submissions)
-                .WithOne(x => x.Test)
-                .HasForeignKey(x => x.TestId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -81,7 +81,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
             builder.HasMany(x => x.Submissions)
                 .WithOne(x => x.Student)
                 .HasForeignKey(x => x.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasMany(x => x.GroupMembers)
                 .WithOne(x => x.Student)

@@ -8,7 +8,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<SubmissionAnswer> builder)
         {
-            builder.ToTable("SUBMISSION_ANSWER", schema: "submission");
+            builder.ToTable("SYS_SUBMISSION_ANSWER", schema: "submission");
 
             builder.HasKey(x => x.Id);
 
