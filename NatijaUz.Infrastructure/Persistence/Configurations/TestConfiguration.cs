@@ -8,7 +8,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Test> builder)
         {
-            builder.ToTable("SYS_TEST", schema: "academic");
+            builder.ToTable("ACADEMIC_TEST", schema: "academic");
 
             builder.HasKey(x => x.Id);
 
@@ -35,7 +35,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.Deadline)
                 .HasColumnType("timestamp with time zone")
-                .HasColumnName("DEADLINE") 
+                .HasColumnName("DEADLINE")
                 .IsRequired();
 
             builder.Property(x => x.IsActive)
@@ -44,22 +44,27 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("timestamp with time zone")
-                .HasColumnName("CREATED_AT");
+                .HasColumnName("CREATED_AT")
+                .IsRequired();
 
             builder.Property(x => x.CreateUserId)
                 .HasColumnType("bigint")
-                .HasColumnName("CREATE_USER_ID");
+                .HasColumnName("CREATE_USER_ID")
+                .IsRequired(false);
 
             builder.Property(x => x.ModifiedAt)
                 .HasColumnType("timestamp with time zone")
-                .HasColumnName("MODIFIED_AT");
+                .HasColumnName("MODIFIED_AT")
+                .IsRequired(false);
 
             builder.Property(x => x.ModifiedUserId)
                 .HasColumnType("bigint")
-                .HasColumnName("MODIFIED_USER_ID");
+                .HasColumnName("MODIFIED_USER_ID")
+                .IsRequired(false);
 
             builder.HasOne(x => x.Group)
                 .WithMany(x => x.Tests)
+                .HasForeignKey(x => x.GroupId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.AnswerKeys)

@@ -1,4 +1,5 @@
 ﻿using NatijaUz.Domain.Common;
+using NatijaUz.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NatijaUz.Domain.Entity
@@ -8,7 +9,7 @@ namespace NatijaUz.Domain.Entity
         public long TestId { get; set; }
         public long StudentId { get; set; }
         public string ImageUrl { get; set; } = null!;
-        public Submission Status { get; set; } = null!;
+        public SubmissionStatus Status { get; set; }
         public DateTime SubmittedAt { get; set; }
         public int? CorrectCount { get; set; }
         public decimal? TotalScore { get; set; }

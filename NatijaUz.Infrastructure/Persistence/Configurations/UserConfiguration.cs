@@ -8,7 +8,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("SYS_USER", schema: "identity");
+            builder.ToTable("SYS_USER", schema: "sys");
 
             builder.HasKey(x => x.Id);
 
@@ -23,14 +23,13 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasMaxLength(200)
                 .IsUnicode(true)
                 .IsRequired();
-            builder.HasAlternateKey(x => x.FullName);
 
             builder.Property(x => x.PhoneNumber)
                 .HasColumnType("varchar(9)")
                 .HasColumnName("PHONE_NUMBER")
                 .HasMaxLength(9)
                 .IsRequired();
-            builder.HasAlternateKey(x => x.PhoneNumber);
+            builder.HasIndex(x => x.PhoneNumber).IsUnique();
 
             builder.Property(x => x.PasswordHash)
                 .HasColumnType("varchar(1000)")
@@ -40,8 +39,11 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .IsRequired();
 
             builder.Property(x => x.Role)
+                .HasColumnType("text")
                 .HasColumnName("ROLE")
-                .HasConversion<string>();
+                .HasMaxLength(15)
+                .HasConversion<string>()
+                .IsRequired();
 
             builder.Property(x => x.LearningCenterId)
                 .HasColumnType("bigint")
@@ -49,7 +51,8 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("timestamp with time zone")
-                .HasColumnName("CREATED_AT");
+                .HasColumnName("CREATED_AT")
+                .IsRequired();
 
             builder.Property(x => x.CreateUserId)
                 .HasColumnType("bigint")
