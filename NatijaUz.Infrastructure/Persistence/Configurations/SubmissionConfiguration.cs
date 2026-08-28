@@ -25,7 +25,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
             builder.Property(x => x.StudentId)
                 .HasColumnType("bigint")
                 .HasColumnName("STUDENT_ID")
-                .IsRequired(false);
+                .IsRequired();
 
             builder.Property(x => x.ImageUrl)
                 .HasColumnType("text")

@@ -25,7 +25,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
             builder.Property(x => x.DetectedAnswer)
                 .HasColumnType("character(1)")
                 .HasColumnName("DETECTED_ANSWER")
-                .IsRequired(false);
+                .IsRequired();
 
             builder.Property(x => x.IsCorrect)
                 .HasColumnType("boolean")
