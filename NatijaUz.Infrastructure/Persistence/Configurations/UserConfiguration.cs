@@ -71,22 +71,6 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasForeignKey(x => x.LearningCenterId)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.SetNull);
-
-            builder.HasMany(x => x.Groups)
-                .WithOne(x => x.Teacher)
-                .HasForeignKey(x => x.TeacherId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasMany(x => x.Submissions)
-                .WithOne(x => x.Student)
-                .HasForeignKey(x => x.StudentId)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            builder.HasMany(x => x.GroupMembers)
-                .WithOne(x => x.Student)
-                .HasForeignKey(x => x.StudentId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

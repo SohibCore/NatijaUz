@@ -71,11 +71,6 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .WithOne(x => x.Test)
                 .HasForeignKey(x => x.TestId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(x => x.Submissions)
-                .WithOne(x => x.Test)
-                .HasForeignKey(x => x.TestId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

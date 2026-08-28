@@ -72,6 +72,16 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnType("bigint")
                 .HasColumnName("MODIFIED_USER_ID")
                 .IsRequired(false);
+
+            builder.HasOne(x => x.Student)
+                .WithMany(x => x.Submissions)
+                .HasForeignKey(x => x.StudentId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(x => x.Test)
+                .WithMany(x => x.Submissions)
+                .HasForeignKey(x => x.TestId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
