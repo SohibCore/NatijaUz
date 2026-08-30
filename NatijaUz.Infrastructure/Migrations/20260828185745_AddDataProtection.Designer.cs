@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NatijaUz.Infrastructure.Persistence;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NatijaUz.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260828185745_AddDataProtection")]
+    partial class AddDataProtection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -454,7 +457,7 @@ namespace NatijaUz.Infrastructure.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("FULL_NAME");
 
-                    b.Property<long?>("LearningCenterId")
+                    b.Property<long>("LearningCenterId")
                         .HasColumnType("bigint")
                         .HasColumnName("LEARNING_CENTER_ID");
 
@@ -484,12 +487,6 @@ namespace NatijaUz.Infrastructure.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("text")
                         .HasColumnName("ROLE");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("USER_NAME");
 
                     b.HasKey("Id");
 

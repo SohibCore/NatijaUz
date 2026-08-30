@@ -4,6 +4,7 @@
     {
         Student,
         Teacher,
-        Admin
+        SysAdmin,
+        CenterAdmin
     }
 }

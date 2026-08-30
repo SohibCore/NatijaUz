@@ -7,8 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
     <PackageReference Include="MediatR" Version="14.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.12" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\UserService\Commands\Delete\" />
+    <Folder Include="Services\UserService\Commands\Update\" />
+    <Folder Include="Services\UserService\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NatijaUz.Domain\NatijaUz.Domain.csproj" />
+    <ProjectReference Include="..\NatijaUz.Infrastructure\NatijaUz.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

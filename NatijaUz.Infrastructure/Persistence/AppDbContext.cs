@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 
 namespace NatijaUz.Infrastructure.Persistence
 {
-    public class AppDbContext : DbContext//, IDataProtectionKeyContext
+    public class AppDbContext : DbContext, IDataProtectionKeyContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -16,7 +16,7 @@ namespace NatijaUz.Infrastructure.Persistence
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<AnswerKey> AnswerKeys { get; set; }
-        //public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+        public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -17,6 +17,13 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnName("ID")
                 .ValueGeneratedOnAdd();
 
+            builder.Property(x => x.UserName)
+                .HasColumnName("USER_NAME")
+                .HasColumnType("varchar(50)")
+                .HasMaxLength(50)
+                .IsRequired();
+            builder.HasIndex(x => x.UserName).IsUnique();
+
             builder.Property(x => x.FullName)
                 .HasColumnType("varchar(200)")
                 .HasColumnName("FULL_NAME")
@@ -47,7 +54,8 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
 
             builder.Property(x => x.LearningCenterId)
                 .HasColumnType("bigint")
-                .HasColumnName("LEARNING_CENTER_ID");
+                .HasColumnName("LEARNING_CENTER_ID")
+                .IsRequired(false);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("timestamp with time zone")
