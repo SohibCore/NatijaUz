@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.Services;
+using NatijaUz.Application.Common;
 using NatijaUz.Application.Services.UserService.Dtos;
 using NatijaUz.Domain.Entity;
+using NatijaUz.Domain.Enums;
 using NatijaUz.Infrastructure.Persistence;
 
 namespace NatijaUz.Application.Services.UserService.Commands.Create.CenterAdmin
@@ -28,10 +30,11 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create.CenterAdmin
             if (userName)
                 throw new Exception($"Bu nom band - {request.dto.UserName}, iltimos boshqa nomdan foydalaning");
 
-            var admin = await _context.Users.AnyAsync(x => x.Role == Domain.Enums.UserRole.CenterAdmin && x.Id == _service.UserId, cancellation);
+            if (!RolePermissions.CanCreate(_service.Role, request.dto.Role))
+                throw new Exception("Sizda bu rolni yaratishga ruxsat yo'q");
 
-            if (!admin)
-                throw new Exception("Siz yangi foydalanuvchi qo'sha olmaysiz");
+            if (_service.Role == UserRole.CenterAdmin && request.dto.LearningCenterId != _service.LearningCenterId)
+                throw new ForbiddenException("Faqat o'z markazingizga foydalanuvchi qo'sha olasiz");
 
             var centerAdmin = new User
             {
@@ -55,7 +58,6 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create.CenterAdmin
                 UserName = centerAdmin.UserName,
                 FullName = centerAdmin.FullName,
                 PhoneNumber = centerAdmin.PhoneNumber,
-                Password = centerAdmin.PasswordHash,
                 Role = centerAdmin.Role,
                 LearningCenterId = centerAdmin.LearningCenterId,
             };

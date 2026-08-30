@@ -50,7 +50,6 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create.Student
                 Id = student.Id,
                 FullName = student.FullName,
                 PhoneNumber = student.PhoneNumber,
-                Password = student.PasswordHash,
             };
         }
     }

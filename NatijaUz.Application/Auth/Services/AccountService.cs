@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using NatijaUz.Domain.Enums;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
 namespace NatijaUz.Application.Auth.Services
@@ -22,5 +23,23 @@ namespace NatijaUz.Application.Auth.Services
         }
         public string UserName
                         => _accessor.HttpContext?.User?.Identity?.Name ?? string.Empty;
+
+        public UserRole Role
+        {
+            get
+            {
+                var claim = _accessor.HttpContext?.User?.FindFirst(ClaimTypes.Role)?.Value;
+                return claim != null ? Enum.Parse<UserRole>(claim) : throw new UnauthorizedAccessException("Foydalanuvchi roli topilmadi");
+            }
+        }
+
+        public long? LearningCenterId
+        {
+            get
+            {
+                var claim = _accessor.HttpContext?.User?.FindFirst("LearningCenterId")?.Value;
+                return string.IsNullOrEmpty(claim) ? null : long.Parse(claim);
+            }
+        }
     }
 }
