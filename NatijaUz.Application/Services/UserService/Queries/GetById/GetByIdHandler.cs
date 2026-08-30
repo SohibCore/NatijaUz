@@ -30,7 +30,7 @@ namespace NatijaUz.Application.Services.UserService.Queries.GetById
                 if (_service.Role == Domain.Enums.UserRole.CenterAdmin && _service.LearningCenterId != user.LearningCenterId)
                     throw new Exception("Faqat o'z markazingizdagi foydalanuvchini ko'ra olasiz");
             }
-
+             
             return new UserDto
             { 
                 Id = user.Id,
