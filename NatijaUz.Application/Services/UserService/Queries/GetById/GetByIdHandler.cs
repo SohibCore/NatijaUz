@@ -19,7 +19,7 @@ namespace NatijaUz.Application.Services.UserService.Queries.GetById
         public async Task<UserDto> Handle(GetByIdCommand request, CancellationToken cancellation)
         {
             var user = await _context.Users
-                .AsNoTracking()
+                .AsNoTracking() 
                 .FirstOrDefaultAsync(x => x.Id == request.Id && x.Status != Domain.Enums.Status.Deleted, cancellation) ?? throw new Exception("Foydalanuvchi topilmadi");
 
             if (_service.UserId != user.Id)
