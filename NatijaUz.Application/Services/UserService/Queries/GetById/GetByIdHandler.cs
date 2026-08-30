@@ -24,7 +24,7 @@ namespace NatijaUz.Application.Services.UserService.Queries.GetById
 
             if (_service.UserId != user.Id)
             {
-                if (!RolePermissions.CanManage(_service.Role, user.Role))
+                if (!RolePermissions.CanManage(_service.Role, user.Role)) 
                     throw new Exception("Sizda bu foydalanuvchini ko'rishga ruxsat yo'q");
 
                 if (_service.Role == Domain.Enums.UserRole.CenterAdmin && _service.LearningCenterId != user.LearningCenterId)
