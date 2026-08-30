@@ -32,7 +32,7 @@ namespace NatijaUz.Application.Services.UserService.Queries.GetById
             }
 
             return new UserDto
-            {
+            { 
                 Id = user.Id,
                 UserName = user.UserName,
                 FullName = user.FullName,
