@@ -10,6 +10,6 @@ namespace NatijaUz.Application.Common
             { UserRole.CenterAdmin, new[] { UserRole.Teacher, UserRole.Student } },
         };
 
-        public static bool CanCreate(UserRole creatorRole, UserRole targetRole) => AllowedToCreate.TryGetValue(creatorRole, out var allowed) && allowed.Contains(targetRole);
+        public static bool CanManage(UserRole creatorRole, UserRole targetRole) => AllowedToCreate.TryGetValue(creatorRole, out var allowed) && allowed.Contains(targetRole);
     }
 }

@@ -10,6 +10,7 @@ namespace NatijaUz.Domain.Entity
         public string PhoneNumber { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
         public UserRole Role { get; set; }
+        public Status Status { get; set; }
         public long? LearningCenterId { get; set; }
 
         public LearningCenter LearningCenter { get; set; } = null!;

@@ -52,6 +52,12 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasConversion<string>()
                 .IsRequired();
 
+            builder.Property(x => x.Status)
+                .HasColumnType("text")
+                .HasColumnName("STATUS")
+                .HasConversion<string>()
+                 .IsRequired();
+
             builder.Property(x => x.LearningCenterId)
                 .HasColumnType("bigint")
                 .HasColumnName("LEARNING_CENTER_ID")
