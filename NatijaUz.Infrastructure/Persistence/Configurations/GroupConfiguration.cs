@@ -45,28 +45,34 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
+            builder.Property(x => x.Status)
+                .HasColumnType("text")
+                .HasColumnName("STATUS")
+                .HasColumnOrder(5)
+                .IsRequired();
+
             builder.Property(x => x.CreatedAt)
               .HasColumnType("timestamp with time zone")
               .HasColumnName("CREATED_AT")
-              .HasColumnOrder(5)
+              .HasColumnOrder(6)
               .IsRequired();
 
             builder.Property(x => x.CreateUserId)
                 .HasColumnType("bigint")
                 .HasColumnName("CREATE_USER_ID")
-                .HasColumnOrder(6)
+                .HasColumnOrder(7)
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedAt)
                 .HasColumnType("timestamp with time zone")
                 .HasColumnName("MODIFIED_AT")
-                .HasColumnOrder(7)
+                .HasColumnOrder(8)
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedUserId)
                 .HasColumnType("bigint")
                 .HasColumnName("MODIFIED_USER_ID")
-                .HasColumnOrder(8)
+                .HasColumnOrder(9)
                 .IsRequired(false);
 
             builder.HasOne(x => x.LearningCenter)

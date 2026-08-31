@@ -14,11 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\UserService\Queries\GetList\" />
-    <Folder Include="Services\UserService\Queries\ObjectQueries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\NatijaUz.Domain\NatijaUz.Domain.csproj" />
     <ProjectReference Include="..\NatijaUz.Infrastructure\NatijaUz.Infrastructure.csproj" />
   </ItemGroup>

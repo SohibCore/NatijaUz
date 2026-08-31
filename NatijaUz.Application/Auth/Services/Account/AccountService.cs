@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
 
-namespace NatijaUz.Application.Auth.Services
+namespace NatijaUz.Application.Auth.Services.Account
 {
     public class AccountService : IAccountService
     {

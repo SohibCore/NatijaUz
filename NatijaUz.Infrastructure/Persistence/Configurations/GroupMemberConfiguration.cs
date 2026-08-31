@@ -30,28 +30,34 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnOrder(2)
                 .IsRequired(false);
 
+            builder.Property(x => x.Status)
+                .HasColumnType("text")
+                .HasColumnName("STATUS")
+                .HasColumnOrder(3)
+                .IsRequired(false);
+
             builder.Property(x => x.CreatedAt)
                .HasColumnType("timestamp with time zone")
                .HasColumnName("CREATED_AT")
-               .HasColumnOrder(3)
+               .HasColumnOrder(4)
                .IsRequired();
 
             builder.Property(x => x.CreateUserId)
                 .HasColumnType("bigint")
                 .HasColumnName("CREATE_USER_ID")
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedAt)
                 .HasColumnType("timestamp with time zone")
                 .HasColumnName("MODIFIED_AT")
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .IsRequired(false);
 
             builder.Property(x => x.ModifiedUserId)
                 .HasColumnType("bigint")
                 .HasColumnName("MODIFIED_USER_ID")
-                .HasColumnOrder(6)
+                .HasColumnOrder(7)
                 .IsRequired(false);
 
             builder.HasOne(x => x.Group)

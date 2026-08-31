@@ -16,6 +16,7 @@ namespace NatijaUz.Infrastructure.Persistence
         public DbSet<GroupMember> GroupMembers { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<AnswerKey> AnswerKeys { get; set; }
+        public DbSet<PendingRegistration> PendingRegistrations { get; set; }
         public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

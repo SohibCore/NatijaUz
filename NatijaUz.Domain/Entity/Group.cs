@@ -1,4 +1,5 @@
 ﻿using NatijaUz.Domain.Common;
+using NatijaUz.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NatijaUz.Domain.Entity
@@ -9,6 +10,7 @@ namespace NatijaUz.Domain.Entity
         public long LearningCenterId { get; set; }
         public long TeacherId { get; set; }
         public string Subject { get; set; } = null!;
+        public Status Status { get; set; }
 
         // Navigation properties
         [ForeignKey(nameof(TeacherId))]

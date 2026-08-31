@@ -1,6 +1,6 @@
 ﻿using NatijaUz.Domain.Enums;
 
-namespace NatijaUz.Application.Auth.Services
+namespace NatijaUz.Application.Auth.Services.Account
 {
     public interface IAccountService
     {

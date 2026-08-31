@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\NatijaUz.Application\NatijaUz.Application.csproj" />
     <ProjectReference Include="..\NatijaUz.Infrastructure\NatijaUz.Infrastructure.csproj" />
   </ItemGroup>
 

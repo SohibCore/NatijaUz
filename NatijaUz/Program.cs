@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using NatijaUz.Application.Auth.Services.Account;
+using NatijaUz.Application.Services.UserService.Commands.Create;
 using NatijaUz.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +21,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Service
+builder.Services.AddScoped<IAccountService, AccountService>();
+
+//Mediatr
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly);
+});
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

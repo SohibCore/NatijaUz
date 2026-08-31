@@ -3,10 +3,10 @@ using NatijaUz.Domain.Enums;
 using NatijaUz.Domain.Entity;
 using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
-using NatijaUz.Application.Auth.Services;
 using NatijaUz.Infrastructure.Persistence;
 using System.ComponentModel.DataAnnotations;
 using NatijaUz.Application.Services.UserService.Dtos;
+using NatijaUz.Application.Auth.Services.Account;
 
 namespace NatijaUz.Application.Services.UserService.Commands.Create
 {
@@ -47,6 +47,7 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.dto.Password),
                 Role = request.dto.Role,
                 LearningCenterId = request.dto.LearningCenterId,
+                Status = Status.Created
 
                 CreatedAt = DateTime.UtcNow,
                 CreateUserId = _service.UserId,
