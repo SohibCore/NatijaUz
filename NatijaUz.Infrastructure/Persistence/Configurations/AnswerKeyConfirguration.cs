@@ -36,6 +36,12 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnOrder(3)
                 .IsRequired();
 
+            builder.Property(x => x.Status)
+               .HasColumnType("text")
+               .HasColumnName("STATUS")
+               .HasColumnOrder(4)
+               .IsRequired();
+
             builder.HasOne(x => x.Test)
                 .WithMany(x => x.AnswerKeys)
                 .HasForeignKey(x => x.TestId)
