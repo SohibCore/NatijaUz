@@ -1,14 +1,14 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using NatijaUz.Application.Auth.AuthDto;
-using NatijaUz.Application.Auth.Services.Auth;
-using NatijaUz.Application.Auth.Services.RegisterService.Commands.Register;
-using NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmail;
-using SendGrid.Helpers.Errors.Model;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
+using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Application.Auth.AuthDto;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+using NatijaUz.Application.Auth.AuthService;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using NatijaUz.Application.Auth.Services.VerifyEmail.Commands;
+using NatijaUz.Application.Auth.Services.RegisterService.Commands;
 
 namespace NatijaUz.Api.Controllers
 {

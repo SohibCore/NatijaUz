@@ -1,13 +1,13 @@
 ﻿using MediatR;
-using System.Security.Claims;
 using NatijaUz.Domain.Entity;
+using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.AuthDto;
 using NatijaUz.Infrastructure.Persistence;
-using NatijaUz.Application.Services.UserService.Dtos;
-using NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmail;
+using NatijaUz.Application.Auth.Services.VerifyEmail.Commands;
+using NatijaUz.Application.Auth.Services.RegisterService.Dtos;
 
-namespace NatijaUz.Application.Auth.Services.Auth
+namespace NatijaUz.Application.Auth.AuthService
 {
     public class AuthService : IAuthService
     {
@@ -18,9 +18,9 @@ namespace NatijaUz.Application.Auth.Services.Auth
             _context = context;
             _mediator = mediator;
         }
-        public async Task<AuthResult> RegisterAsync(CreateUserDto dto, CancellationToken cancellationToken)
+        public async Task<AuthResult> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken)
         {
-            var userNameTaken = await _context.Users.SingleOrDefaultAsync(x => x.UserName == dto.UserName, cancellationToken) ?? throw new Exception("$'{dto.UserName}' foydalanuvchi nomib allaqachon band.");
+            var userNameTaken = await _context.Users.SingleOrDefaultAsync(x => x.UserName == dto.UserName, cancellationToken) ?? throw new Exception($"'{dto.UserName}' foydalanuvchi nomib allaqachon band.");
 
             var user = new User
             {
@@ -32,8 +32,6 @@ namespace NatijaUz.Application.Auth.Services.Auth
                 Address = dto.Address,
                 Pinfl = dto.Pinfl,
                 DateOfBirth = dto.DateOfBirth,
-                Role = dto.Role,
-                LearningCenterId = dto.LearningCenterId,
 
                 CreatedAt = DateTime.UtcNow,
                 Status = Domain.Enums.Status.Created,
@@ -57,7 +55,7 @@ namespace NatijaUz.Application.Auth.Services.Auth
                 .SingleOrDefaultAsync(x => x.UserName == dto.UserName, cancellationToken);
 
             if (user is null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
-                throw new Exception("UserName	yoki	parol	noto'g'ri.");
+                throw new Exception("UserName yoki parol noto'g'ri.");
 
             if (user.Status == Domain.Enums.Status.Deleted)
                 throw new Exception("Bu hisob o'chirilgan");

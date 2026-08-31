@@ -1,6 +1,6 @@
-﻿using NatijaUz.Application.Auth.Services.RegisterService.Interfaces;
+﻿using NatijaUz.Application.Auth.Services.VerifyEmail.Interfaces;
 
-namespace NatijaUz.Application.Auth.Services.RegisterService.Services
+namespace NatijaUz.Application.Auth.Services.VerifyEmail.Services
 {
     public class BCryptPasswordHasher : IPasswordHasher
     {

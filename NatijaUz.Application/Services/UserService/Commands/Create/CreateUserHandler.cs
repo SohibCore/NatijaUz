@@ -5,8 +5,8 @@ using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using System.ComponentModel.DataAnnotations;
+using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.UserService.Dtos;
-using NatijaUz.Application.Auth.Services.Account;
 
 namespace NatijaUz.Application.Services.UserService.Commands.Create
 {

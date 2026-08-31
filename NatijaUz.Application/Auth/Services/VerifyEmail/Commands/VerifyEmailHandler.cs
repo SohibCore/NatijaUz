@@ -2,10 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.AuthDto;
 using NatijaUz.Infrastructure.Persistence;
-using NatijaUz.Application.Auth.Services.Auth;
-using NatijaUz.Application.Services.UserService.Dtos;
+using NatijaUz.Application.Auth.AuthService;
+using NatijaUz.Application.Auth.Services.RegisterService.Dtos;
 
-namespace NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmail
+namespace NatijaUz.Application.Auth.Services.VerifyEmail.Commands
 {
     public class VerifyEmailCommandHandler : IRequestHandler<VerifyEmailCommand, AuthResult>
     {
@@ -36,7 +36,7 @@ namespace NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmai
                 throw new Exception("Kod noto'g'ri");
             }
 
-            var dto = new CreateUserDto
+            var dto = new RegisterDto
             {
                 UserName = pending.UserName,
                 Password = pending.Password,
@@ -46,8 +46,6 @@ namespace NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmai
                 Pinfl = pending.Pinfl,
                 Address = pending.Address,
                 DateOfBirth = pending.DateOfBirth,
-                LearningCenterId = pending.LearningCenterId,
-                Role = pending.Role
             };
 
             var authResult = await _authService.RegisterAsync(dto, cancellation);

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using NatijaUz.Application.Auth.Services.Account;
 using NatijaUz.Infrastructure.Persistence;
+using NatijaUz.Application.Auth.AccountService;
 
 namespace NatijaUz.Application.Services.UserService.Commands.Password
 {

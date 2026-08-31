@@ -3,7 +3,7 @@ using NatijaUz.Domain.Enums;
 using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
-using NatijaUz.Application.Auth.Services.Account;
+using NatijaUz.Application.Auth.AccountService;
 
 namespace NatijaUz.Application.Services.UserService.Commands.Delete
 {

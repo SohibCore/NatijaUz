@@ -1,4 +1,4 @@
-﻿namespace NatijaUz.Application.Auth.Services.RegisterService.Services
+﻿namespace NatijaUz.Application.Auth.Services.VerifyEmail.Services
 {
     public class EmailSettings
     {

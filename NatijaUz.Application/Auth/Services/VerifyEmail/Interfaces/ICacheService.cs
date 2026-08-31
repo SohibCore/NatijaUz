@@ -1,4 +1,4 @@
-﻿namespace NatijaUz.Application.Auth.Services.RegisterService.Interfaces
+﻿namespace NatijaUz.Application.Auth.Services.VerifyEmail.Interfaces
 {
     public interface ICacheService
     {

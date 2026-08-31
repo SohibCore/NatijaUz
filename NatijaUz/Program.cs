@@ -2,12 +2,13 @@ using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication;
 using NatijaUz.Infrastructure.Persistence;
-using NatijaUz.Application.Auth.Services.Auth;
-using NatijaUz.Application.Auth.Services.Account;
+using NatijaUz.Application.Auth.AuthService;
+using NatijaUz.Application.Auth.AccountService;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using NatijaUz.Application.Auth.Services.VerifyEmail.Services;
 using NatijaUz.Application.Services.UserService.Commands.Create;
-using NatijaUz.Application.Auth.Services.RegisterService.Services;
-using NatijaUz.Application.Auth.Services.RegisterService.Interfaces;
+using NatijaUz.Application.Auth.Services.VerifyEmail.Interfaces;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,6 +81,10 @@ builder.Services.AddScoped<IEmailSender, MailKitEmailSender>();
 builder.Services.AddMemoryCache();
 builder.Services.AddScoped<ICacheService, MemoryCacheService>();
 builder.Services.AddScoped<IPasswordHasher, BCryptPasswordHasher>();
+
+//Email ishlashi uchun
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 
 //Mediatr
 builder.Services.AddMediatR(cfg =>
