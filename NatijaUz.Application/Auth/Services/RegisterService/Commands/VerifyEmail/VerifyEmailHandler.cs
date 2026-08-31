@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.AuthDto;
+using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.Services.Auth;
 using NatijaUz.Application.Services.UserService.Dtos;
-using NatijaUz.Infrastructure.Persistence;
 
-namespace NatijaUz.Application.Auth.Services.RegisterService.Commands
+namespace NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmail
 {
     public class VerifyEmailCommandHandler : IRequestHandler<VerifyEmailCommand, AuthResult>
     {
@@ -38,11 +38,16 @@ namespace NatijaUz.Application.Auth.Services.RegisterService.Commands
 
             var dto = new CreateUserDto
             {
+                UserName = pending.UserName,
                 Password = pending.Password,
                 FullName = pending.FullName,
-                UserName = pending.UserName,
                 PhoneNumber = pending.PhoneNumber,
-
+                Email = pending.Email,
+                Pinfl = pending.Pinfl,
+                Address = pending.Address,
+                DateOfBirth = pending.DateOfBirth,
+                LearningCenterId = pending.LearningCenterId,
+                Role = pending.Role
             };
 
             var authResult = await _authService.RegisterAsync(dto, cancellation);

@@ -10,7 +10,7 @@ namespace NatijaUz.Domain.Entity
         public long LearningCenterId { get; set; }
         public long TeacherId { get; set; }
         public string Subject { get; set; } = null!;
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         // Navigation properties
         [ForeignKey(nameof(TeacherId))]

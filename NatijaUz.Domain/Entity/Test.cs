@@ -11,7 +11,7 @@ namespace NatijaUz.Domain.Entity
         public int QuestionCount { get; set; }
         public DateTime Deadline { get; set; }
         public bool IsActive { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         //Navigation Properties
         [ForeignKey(nameof(GroupId))]

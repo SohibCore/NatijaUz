@@ -1,5 +1,6 @@
 ﻿using NatijaUz.Application.Auth.AuthDto;
 using NatijaUz.Application.Services.UserService.Dtos;
+using NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmail;
 
 namespace NatijaUz.Application.Auth.Services.Auth
 {

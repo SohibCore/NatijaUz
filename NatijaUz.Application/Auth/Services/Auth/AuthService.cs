@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using System.Security.Claims;
+using NatijaUz.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.AuthDto;
-using NatijaUz.Application.Services.UserService.Dtos;
-using NatijaUz.Domain.Entity;
 using NatijaUz.Infrastructure.Persistence;
-using System.Security.Claims;
+using NatijaUz.Application.Services.UserService.Dtos;
+using NatijaUz.Application.Auth.Services.RegisterService.Commands.VerifyEmail;
 
 namespace NatijaUz.Application.Auth.Services.Auth
 {
@@ -27,9 +28,15 @@ namespace NatijaUz.Application.Auth.Services.Auth
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 FullName = dto.FullName,
                 PhoneNumber = dto.PhoneNumber,
-                Status = Domain.Enums.Status.Created,
+                Email = dto.Email,
+                Address = dto.Address,
+                Pinfl = dto.Pinfl,
+                DateOfBirth = dto.DateOfBirth,
+                Role = dto.Role,
+                LearningCenterId = dto.LearningCenterId,
 
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                Status = Domain.Enums.Status.Created,
             };
             await _context.Users.AddAsync(user, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);

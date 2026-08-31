@@ -9,7 +9,7 @@ namespace NatijaUz.Domain.Entity
         public long TestId { get; set; }
         public int QuestionNumber { get; set; }
         public char CorrectAnswer { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         //Navigation Properties
         [ForeignKey(nameof(TestId))]

@@ -40,7 +40,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                .HasColumnType("text")
                .HasColumnName("STATUS")
                .HasColumnOrder(4)
-               .IsRequired();
+               .IsRequired(false);
 
             builder.HasOne(x => x.Test)
                 .WithMany(x => x.AnswerKeys)

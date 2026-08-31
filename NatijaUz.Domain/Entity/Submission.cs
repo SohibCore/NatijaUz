@@ -10,7 +10,7 @@ namespace NatijaUz.Domain.Entity
         public long StudentId { get; set; }
         public string ImageUrl { get; set; } = null!;
         public SubmissionStatus SubmissionStatus { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
         public DateTime SubmittedAt { get; set; }
         public int? CorrectCount { get; set; }
         public decimal? TotalScore { get; set; }

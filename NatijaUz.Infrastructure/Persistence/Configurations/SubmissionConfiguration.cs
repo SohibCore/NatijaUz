@@ -66,7 +66,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnName("STATUS")
                 .HasColumnOrder(8)
                 .HasConversion<string>()
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnType("timestamp with time zone")

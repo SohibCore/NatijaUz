@@ -47,7 +47,7 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.dto.Password),
                 Role = request.dto.Role,
                 LearningCenterId = request.dto.LearningCenterId,
-                Status = Status.Created
+                Status = Status.Created,
 
                 CreatedAt = DateTime.UtcNow,
                 CreateUserId = _service.UserId,

@@ -91,7 +91,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnName("STATUS")
                 .HasColumnOrder(9)
                 .HasConversion<string>()
-                 .IsRequired();
+                 .IsRequired(false);
 
             builder.Property(x => x.LearningCenterId)
                 .HasColumnType("bigint")

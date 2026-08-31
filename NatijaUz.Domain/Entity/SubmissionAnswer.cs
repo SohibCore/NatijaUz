@@ -10,7 +10,7 @@ namespace NatijaUz.Domain.Entity
         public int QuestionNumber { get; set; }
         public char DetectedAnswer { get; set; }
         public bool IsCorrect { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         //Navigation Property
         [ForeignKey(nameof(SubmissionId))]

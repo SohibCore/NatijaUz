@@ -49,7 +49,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnType("text")
                 .HasColumnName("STATUS")
                 .HasColumnOrder(5)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(x => x.CreatedAt)
               .HasColumnType("timestamp with time zone")

@@ -10,11 +10,11 @@ namespace NatijaUz.Domain.Entity
         public string FullName { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Address { get; set; } = null!;
-        public string DateOfBirth { get; set; } = null!;
+        public DateTime DateOfBirth { get; set; } 
         public string Email { get; set; } = null!;
         public string Pinfl { get; set; } = null!;
         public UserRole Role { get; set; }
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
         public long? LearningCenterId { get; set; }
 
         public LearningCenter LearningCenter { get; set; } = null!;
