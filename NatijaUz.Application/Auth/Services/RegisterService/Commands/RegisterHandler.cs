@@ -27,8 +27,10 @@ namespace NatijaUz.Application.Auth.Services.RegisterService.Commands
 
             var code = new Random().Next(100000, 999999).ToString();
 
+            var email = request.dto.Email.Trim().ToLower();
+
             var pending = await _context.PendingRegistrations
-                .SingleOrDefaultAsync(p => p.Email == request.dto.Email, cancellation);
+                .SingleOrDefaultAsync(p => p.Email == email, cancellation);
 
             if (pending is not null)
             {

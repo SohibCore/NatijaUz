@@ -77,7 +77,7 @@ namespace NatijaUz.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("verify-email")]
+        [HttpPost]
         public async Task<IActionResult> VerifyEmail([FromBody] VerifyEmailCommand command, CancellationToken ct)
         {
             try

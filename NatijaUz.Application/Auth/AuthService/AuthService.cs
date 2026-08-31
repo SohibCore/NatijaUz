@@ -20,7 +20,9 @@ namespace NatijaUz.Application.Auth.AuthService
         }
         public async Task<AuthResult> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken)
         {
-            var userNameTaken = await _context.Users.SingleOrDefaultAsync(x => x.UserName == dto.UserName, cancellationToken) ?? throw new Exception($"'{dto.UserName}' foydalanuvchi nomib allaqachon band.");
+            var userNameTaken = await _context.Users.AnyAsync(x => x.UserName == dto.UserName, cancellationToken);
+            if (userNameTaken)
+                throw new Exception($"'{dto.UserName}' foydalanuvchi nomi allaqachon band.");
 
             var user = new User
             {

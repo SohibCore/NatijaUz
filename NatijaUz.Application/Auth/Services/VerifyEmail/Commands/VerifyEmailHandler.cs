@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SendGrid.Helpers.Errors.Model;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.AuthDto;
 using NatijaUz.Infrastructure.Persistence;
@@ -20,20 +21,22 @@ namespace NatijaUz.Application.Auth.Services.VerifyEmail.Commands
 
         public async Task<AuthResult> Handle(VerifyEmailCommand request, CancellationToken cancellation)
         {
+            var email = request.Email.Trim().ToLower();
+
             var pending = await _context.PendingRegistrations
-                .SingleOrDefaultAsync(x => x.Email == request.Email, cancellation);
+                .SingleOrDefaultAsync(x => x.Email == email, cancellation);
 
             if (pending is null)
-                throw new Exception("Ro'yxatdan o'tish topilmadi, qaytadan urinib ko'ring");
+                throw new NotFoundException("Ro'yxatdan o'tish topilmadi, qaytadan urinib ko'ring");
 
             if (pending.ExpiresAt < DateTime.UtcNow)
-                throw new Exception("Kod muddati tugagan");
+                throw new BadRequestException("Kod muddati tugagan");
 
             if (pending.Code != request.Code)
             {
                 pending.AttemptCount++;
                 await _context.SaveChangesAsync(cancellation);
-                throw new Exception("Kod noto'g'ri");
+                throw new BadRequestException("Kod noto'g'ri");
             }
 
             var dto = new RegisterDto

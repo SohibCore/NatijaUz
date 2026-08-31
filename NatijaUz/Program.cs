@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using NatijaUz.Application.Auth.Services.VerifyEmail.Services;
 using NatijaUz.Application.Services.UserService.Commands.Create;
 using NatijaUz.Application.Auth.Services.VerifyEmail.Interfaces;
+using NatijaUz.Application.Services.UserService.Queries.GetList;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,7 +24,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 {
     options.LoginPath = "/api/Auth/Login";
     options.LogoutPath = "/api/Auth/Logout";
-    options.ExpireTimeSpan = TimeSpan.FromHours(7);
+    options.ExpireTimeSpan = TimeSpan.FromHours(3);
     options.SlidingExpiration = true;
     options.Cookie.HttpOnly = true;
     options.Cookie.SameSite = SameSiteMode.Lax;
@@ -91,6 +92,7 @@ builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(GetListCommand).Assembly);
 });
 
 var app = builder.Build();
