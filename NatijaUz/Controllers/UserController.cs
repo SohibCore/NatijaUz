@@ -6,6 +6,7 @@ using NatijaUz.Application.Services.UserService.Commands.Delete;
 using NatijaUz.Application.Services.UserService.Commands.Update;
 using NatijaUz.Application.Services.UserService.Queries.GetById;
 using NatijaUz.Application.Services.UserService.Queries.GetList;
+using NatijaUz.Application.Services.UserService.Commands.Password;
 
 namespace NatijaUz.Api.Controllers
 {
@@ -76,6 +77,13 @@ namespace NatijaUz.Api.Controllers
         public async Task<ActionResult> Delete([FromRoute] long Id, CancellationToken cancellation)
         {
             var result = await _mediator.Send(new DeleteUserCommand(Id), cancellation);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangePassword(PasswordDto dto, CancellationToken cancellation)
+        {
+            var result = await _mediator.Send(new ChangePasswordCommand(dto), cancellation);
             return Ok(result);
         }
     }

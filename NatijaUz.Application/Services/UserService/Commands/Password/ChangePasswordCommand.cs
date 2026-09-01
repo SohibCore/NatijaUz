@@ -2,7 +2,8 @@
 
 namespace NatijaUz.Application.Services.UserService.Commands.Password
 {
-    public record ChangePasswordCommand : IRequest<bool>
+    public record ChangePasswordCommand(PasswordDto dto) : IRequest<bool>;
+    public class PasswordDto
     {
         public long UserId { get; set; }
         public string OldPassword { get; set; } = null!;

@@ -18,10 +18,10 @@ namespace NatijaUz.Application.Services.UserService.Commands.Password
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.Id == _service.UserId && x.Status != Domain.Enums.Status.Deleted, cancellation) ?? throw new Exception("Foydalanuvchi topilmadi!");
 
-            if (!BCrypt.Net.BCrypt.Verify(request.OldPassword, user.PasswordHash))
+            if (!BCrypt.Net.BCrypt.Verify(request.dto.OldPassword, user.PasswordHash))
                 throw new Exception("Eski parolingiz xato!");
 
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword);
+            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.dto.NewPassword);
             user.ModifiedAt = DateTime.UtcNow;
             user.ModifiedUserId = _service.UserId;
 

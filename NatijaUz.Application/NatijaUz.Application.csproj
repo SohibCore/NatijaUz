@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.2.0" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="MailKit" Version="4.17.0" />
     <PackageReference Include="MediatR" Version="14.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.12" />
@@ -19,6 +20,15 @@
   <ItemGroup>
     <ProjectReference Include="..\NatijaUz.Domain\NatijaUz.Domain.csproj" />
     <ProjectReference Include="..\NatijaUz.Infrastructure\NatijaUz.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\LearningCenterService\Commands\Delete\" />
+    <Folder Include="Services\LearningCenterService\Commands\Update\" />
+    <Folder Include="Services\LearningCenterService\Queries\" />
+    <Folder Include="Services\TestService\Commands\" />
+    <Folder Include="Services\TestService\Dtos\" />
+    <Folder Include="Services\TestService\Queries\" />
   </ItemGroup>
 
 </Project>
