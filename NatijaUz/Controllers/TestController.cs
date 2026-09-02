@@ -74,7 +74,7 @@ namespace NatijaUz.Api.Controllers
 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)] 
         [HttpDelete("{Id}")]
         public async Task<ActionResult> Delete([FromRoute] long Id, CancellationToken cancellation)
         {
