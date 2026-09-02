@@ -38,16 +38,16 @@ namespace NatijaUz.Application.Services.TestService.Queries.GetList
             };
 
             return await query
-        .Select(x => new TestListDto
-        {
-            Id = x.Id,
-            Title = x.Title,
-            Deadline = x.Deadline,
-            GroupId = x.GroupId,
-            IsActive = x.IsActive,
-            QuestionCount = x.QuestionCount,
-        }).SortFilter(request.filter)
-        .ToListAsync(cancellation);
+               .Select(x => new TestListDto
+               {
+                   Id = x.Id,
+                   Title = x.Title,
+                   Deadline = x.Deadline,
+                   GroupId = x.GroupId,
+                   IsActive = x.IsActive,
+                   QuestionCount = x.QuestionCount,
+               }).SortFilter(request.filter)
+               .ToListAsync(cancellation);
         }
     }
 }

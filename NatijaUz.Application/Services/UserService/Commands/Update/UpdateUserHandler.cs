@@ -24,7 +24,7 @@ namespace NatijaUz.Application.Services.UserService.Commands.Update
             if (user.Id != _service.UserId)
             {
                 if (!RolePermissions.CanManage(_service.Role, user.Role))
-                    throw new Exception("Bu foydalanuvchini yangilash uchun sizda ruxsat yo'q");
+                    throw new Exception("Sizda bu amalni bajarish uchun ruxsat yo'q");
 
                 if (_service.Role == Domain.Enums.UserRole.CenterAdmin && _service.LearningCenterId != user.LearningCenterId)
                     throw new Exception("Faqat o'z markazingizdagi foydalanuvchini yangilay olasiz");

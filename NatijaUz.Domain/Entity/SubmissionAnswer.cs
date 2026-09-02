@@ -1,5 +1,5 @@
-﻿using NatijaUz.Domain.Common;
-using NatijaUz.Domain.Enums;
+﻿using NatijaUz.Domain.Enums;
+using NatijaUz.Domain.Common;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NatijaUz.Domain.Entity
