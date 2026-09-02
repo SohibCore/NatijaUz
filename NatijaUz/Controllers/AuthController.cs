@@ -21,7 +21,7 @@ namespace NatijaUz.Api.Controllers
         public AuthController(IAuthService authService, IMediator mediator)
         {
             _service = authService;
-            _mediator = mediator;
+            _mediator = mediator; 
         }
 
         [AllowAnonymous]
