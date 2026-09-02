@@ -1,10 +1,10 @@
 ﻿using MediatR;
+using NatijaUz.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.TestService.Dtos;
-using NatijaUz.Domain.Enums;
-using NatijaUz.Infrastructure.Persistence;
-using SendGrid.Helpers.Errors.Model;
 
 namespace NatijaUz.Application.Services.TestService.Queries.GetById
 {
@@ -31,7 +31,7 @@ namespace NatijaUz.Application.Services.TestService.Queries.GetById
                     IsActive = x.IsActive,
                     QuestionCount = x.QuestionCount,
                 }).FirstOrDefaultAsync(cancellation) ?? throw new NotFoundException("Test topilmadi");
-
+            
             var group = await _context.Groups.SingleOrDefaultAsync(x => x.Id == test.GroupId && x.Status != Status.Deleted, cancellation) ?? throw new NotFoundException("Guruh topilmadi");
 
             switch (_service.Role)
