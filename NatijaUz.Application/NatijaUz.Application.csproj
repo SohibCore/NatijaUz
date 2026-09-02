@@ -26,9 +26,8 @@
     <Folder Include="Services\LearningCenterService\Commands\Delete\" />
     <Folder Include="Services\LearningCenterService\Commands\Update\" />
     <Folder Include="Services\LearningCenterService\Queries\" />
-    <Folder Include="Services\TestService\Commands\" />
-    <Folder Include="Services\TestService\Dtos\" />
-    <Folder Include="Services\TestService\Queries\" />
+    <Folder Include="Services\TestService\Queries\GetList\" />
+    <Folder Include="Services\TestService\Queries\ObjectQueries\" />
   </ItemGroup>
 
 </Project>
