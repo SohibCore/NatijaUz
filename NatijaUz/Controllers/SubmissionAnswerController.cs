@@ -1,20 +1,20 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NatijaUz.Application.Services.TestService.Dtos;
-using NatijaUz.Application.Services.TestService.Commands.Create;
-using NatijaUz.Application.Services.TestService.Commands.Delete;
-using NatijaUz.Application.Services.TestService.Commands.Update;
-using NatijaUz.Application.Services.TestService.Queries.GetById;
-using NatijaUz.Application.Services.TestService.Queries.GetList;
+using NatijaUz.Application.Services.SubmissionAnswerService.Dtos;
+using NatijaUz.Application.Services.SubmissionAnswerService.Commands.Create;
+using NatijaUz.Application.Services.SubmissionAnswerService.Commands.Delete;
+using NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update;
+using NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetById;
+using NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList;
 
 namespace NatijaUz.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class TestController : ControllerBase
+    public class SubmissionAnswerController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public TestController(IMediator mediator)
+        public SubmissionAnswerController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -23,12 +23,12 @@ namespace NatijaUz.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpGet]
-        public async Task<ActionResult> GetList([FromQuery] TestFilterDto filter, CancellationToken cancellation)
+        public async Task<ActionResult> GetList([FromQuery] SubmissionAnswerFilterDto filter, CancellationToken cancellation)
         {
             var result = await _mediator.Send(new GetListQuery(filter), cancellation);
 
             if (result is null || result.Count() == 0)
-                return NotFound("Hech qanday test topilmadi");
+                return NotFound("Submission answers topilmadi");
 
             return Ok(result);
         }
@@ -42,7 +42,7 @@ namespace NatijaUz.Api.Controllers
             var result = await _mediator.Send(new GetByIdQuery(Id), cancellation);
 
             if (result is null)
-                return NotFound("Test topilmadi");
+                return NotFound("Submission answer topilmadi");
 
             return Ok(result);
         }
@@ -51,9 +51,9 @@ namespace NatijaUz.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] CreateTestDto dto, CancellationToken cancellation)
+        public async Task<ActionResult> Create([FromBody] CreateSubmissionAnswerDto dto, CancellationToken cancellation)
         {
-            var result = await _mediator.Send(new CreateTestCommand(dto), cancellation);
+            var result = await _mediator.Send(new CreateSubmissionAnswerCommand(dto), cancellation);
             return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
@@ -62,12 +62,12 @@ namespace NatijaUz.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [HttpPatch]
-        public async Task<ActionResult> Update([FromBody] UpdateTestDto dto, CancellationToken cancellation)
+        public async Task<ActionResult> Update([FromBody] UpdateSubmissionAnswerDto dto, CancellationToken cancellation)
         {
-            var result = await _mediator.Send(new UpdateTestCommand(dto), cancellation);
+            var result = await _mediator.Send(new UpdateSubmissionAnswerCommand(dto), cancellation);
 
             if (result is null)
-                return NotFound("Test topilmadi");
+                return NotFound("Submission answer topilmadi");
 
             return Ok(result);
         }
@@ -75,12 +75,11 @@ namespace NatijaUz.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)] 
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult> Delete([FromRoute] long Id, CancellationToken cancellation)
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpDelete]
+        public async Task<ActionResult> Delete([FromQuery] long Id, CancellationToken cancellation)
         {
-            var result = await _mediator.Send(new DeleteTestCommand(Id), cancellation);
-
+            var result = await _mediator.Send(new DeleteSubmissionAnswerCommand(Id), cancellation);
             return Ok(result);
         }
     }

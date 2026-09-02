@@ -32,7 +32,7 @@ namespace NatijaUz.Application.Services.TestService.Queries.GetList
 
                 UserRole.Teacher => query.Where(x => x.Group.TeacherId == _service.UserId),
 
-                UserRole.Student => query.Where(x => x.Group.GroupMembers.Any(x => x.StudentId == _service.UserId))
+                UserRole.Student => query.Where(x => x.Group.GroupMembers.Any(x => x.StudentId == _service.UserId)),
 
                 _ => throw new ForbiddenException("Sizda ruxsat yo'q")
             };

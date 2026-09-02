@@ -9,7 +9,7 @@ using NatijaUz.Application.Services.SubmissionAnswerService.Queries.ObjectQuerie
 
 namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList
 {
-    public class GetListHandler : IRequestHandler<GetLisQuery, List<SubmissionAnswerListDto>>
+    public class GetListHandler : IRequestHandler<GetListQuery, List<SubmissionAnswerListDto>>
     {
         private readonly AppDbContext _context;
         private readonly IAccountService _service;
@@ -18,7 +18,7 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList
             _context = context;
             _service = service;
         }
-        public async Task<List<SubmissionAnswerListDto>> Handle(GetLisQuery request, CancellationToken cancellationToken)
+        public async Task<List<SubmissionAnswerListDto>> Handle(GetListQuery request, CancellationToken cancellationToken)
         {
             var query = _context.SubmissionAnswers
                 .AsNoTracking()

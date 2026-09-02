@@ -7,7 +7,7 @@ using NatijaUz.Infrastructure.Persistence;
 
 namespace NatijaUz.Application.Services.LearningCenterService.Commands.Create
 {
-    public class CreateLearningCenterHandler : IRequestHandler<CreateLearningCenterCommand, LearningCenterDto>
+    /*public class CreateLearningCenterHandler : IRequestHandler<CreateLearningCenterCommand, LearningCenterDto>
     {
         private readonly AppDbContext _context;
         private readonly IAccountService _service;
@@ -26,5 +26,5 @@ namespace NatijaUz.Application.Services.LearningCenterService.Commands.Create
 
             }
         }
-    }
+    }*/
 }
