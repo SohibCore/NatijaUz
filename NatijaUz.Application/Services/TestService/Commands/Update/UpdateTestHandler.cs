@@ -20,6 +20,7 @@ namespace NatijaUz.Application.Services.TestService.Commands.Update
         public async Task<TestDto> Handle(UpdateTestCommand request, CancellationToken cancellation)
         {
             var allowedRoles = new UserRole[] { UserRole.SysAdmin, UserRole.CenterAdmin };
+
             if (!allowedRoles.Contains(_service.Role))
                 throw new ForbiddenException("Siz testni yangilay olmaysiz");
 

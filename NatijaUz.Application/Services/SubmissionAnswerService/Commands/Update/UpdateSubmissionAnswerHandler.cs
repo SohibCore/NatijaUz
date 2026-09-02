@@ -35,9 +35,6 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update
             if(request.dto.QuestionNumber.HasValue)
                 submissionAnswer.QuestionNumber = request.dto.QuestionNumber.Value;
 
-            if(request.dto.DetectedAnswer.HasValue)
-                submissionAnswer.DetectedAnswer = request.dto.DetectedAnswer.Value;
-
             if(request.dto.IsCorrect.HasValue)
                 submissionAnswer.IsCorrect = request.dto.IsCorrect.Value;
 

@@ -2,8 +2,8 @@
 {
     public enum SubmissionStatus
     {
-        Pending,
-        Processed,
-        Failed
+        Draft,       // talaba hali javoblarni kiritmoqda/tuzatmoqda
+        Submitted,   // "Tekshirish" bosilgan, endi tahrirlab bo'lmaydi
+        Processed,   // tizim tekshirib, ball hisoblagan
     }
 }

@@ -6,6 +6,7 @@ using NatijaUz.Application.Services.SubmissionAnswerService.Commands.Delete;
 using NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update;
 using NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetById;
 using NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList;
+using NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update.ChekingSubmitedTest;
 
 namespace NatijaUz.Api.Controllers
 {
@@ -80,6 +81,17 @@ namespace NatijaUz.Api.Controllers
         public async Task<ActionResult> Delete([FromQuery] long Id, CancellationToken cancellation)
         {
             var result = await _mediator.Send(new DeleteSubmissionAnswerCommand(Id), cancellation);
+            return Ok(result);
+        }
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [HttpPost]
+        public async Task<ActionResult> ChekingSubmitedTest([FromQuery] long SubmissionId, CancellationToken cancellation)
+        {
+            var result = await _mediator.Send(new ChekingSubmitedTestCommand(SubmissionId), cancellation);
+
             return Ok(result);
         }
     }
