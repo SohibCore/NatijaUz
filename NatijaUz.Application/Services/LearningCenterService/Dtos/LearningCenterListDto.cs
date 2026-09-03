@@ -2,7 +2,7 @@
 
 namespace NatijaUz.Application.Services.LearningCenterService.Dtos
 {
-    public class LearningCenterDto
+    public class LearningCenterListDto
     {
         public long Id { get; set; }
         public string Name { get; set; } = null!;

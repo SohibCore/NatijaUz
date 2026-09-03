@@ -42,11 +42,11 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .IsRequired();
             builder.HasIndex(x => x.PhoneNumber).IsUnique();
 
-            builder.Property(x => x.OwnerUserId)
+            builder.Property(x => x.OwnerId)
                 .HasColumnType("bigint")
                 .HasColumnName("OWNER_USER_ID")
                 .HasColumnOrder(4)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(x => x.Status)
                 .HasColumnType("text")
@@ -58,7 +58,7 @@ namespace NatijaUz.Infrastructure.Persistence.Configurations
                 .HasColumnType("timestamp with time zone")
                 .HasColumnName("CREATED_AT")
                 .HasColumnOrder(6)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(x => x.CreateUserId)
                 .HasColumnType("bigint")

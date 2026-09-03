@@ -5,6 +5,7 @@ using SendGrid.Helpers.Errors.Model;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
+using NatijaUz.Application.Services.UserService.Dtos;
 using NatijaUz.Application.Services.LearningCenterService.Dtos;
 
 
@@ -44,8 +45,8 @@ namespace NatijaUz.Application.Services.LearningCenterService.Commands.Create
                     FullName = request.userDto.FullName,
                     PhoneNumber = request.userDto.PhoneNumber,
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.userDto.Password),
-                    Role = request.userDto.Role,
-                    LearningCenterId = request.userDto.LearningCenterId,
+                    Role = UserRole.Owner,
+                    LearningCenterId = learningCenter.Id,
                     Status = Status.Created,
 
                     CreatedAt = DateTime.UtcNow,
@@ -54,9 +55,31 @@ namespace NatijaUz.Application.Services.LearningCenterService.Commands.Create
 
                 await _context.Users.AddAsync(user, cancel);
                 await _context.SaveChangesAsync(cancel);
+
+                learningCenter.OwnerId = user.Id;
+                learningCenter.CreateUserId = user.Id;
+
+                await _context.SaveChangesAsync(cancel);
             }
             else
                 throw new NotFoundException("O'quv markaz mavjud emas");
+
+            return new LearningCenterDto
+            {
+                Id = learningCenter.Id,
+                Name = learningCenter.Name,
+                Address = learningCenter.Address,
+                PhoneNumber = learningCenter.PhoneNumber,
+                OwnerId = learningCenter.OwnerId,
+                Owner = new UserDto
+                {
+                    Id = learningCenter.OwnerId ?? 0,
+                    UserName = request.userDto.UserName,
+                    FullName = request.userDto.FullName,
+                    PhoneNumber = request.userDto.PhoneNumber,
+                    Role = UserRole.Owner,
+                }
+            };
         }
     }
 }
