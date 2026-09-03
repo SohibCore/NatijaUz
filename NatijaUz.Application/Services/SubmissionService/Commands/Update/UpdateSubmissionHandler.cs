@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
+using NatijaUz.Application.Common;
 using SendGrid.Helpers.Errors.Model;
+using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.SubmissionService.Dtos;
@@ -30,7 +31,7 @@ namespace NatijaUz.Application.Services.SubmissionService.Commands.Update
 
             var student = await _context.Users.FirstOrDefaultAsync(x => x.Id == submission.StudentId && x.Status != Status.Deleted, cancellation) ?? throw new NotFoundException("Talaba topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != submission.Test.Group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != submission.Test.Group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi topshiriqni yangilay olasiz");
 
             if (!string.IsNullOrWhiteSpace(request.dto.ImageUrl))

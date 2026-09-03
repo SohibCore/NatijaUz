@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
+using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Errors.Model;
 using NatijaUz.Infrastructure.Persistence;
@@ -29,7 +30,7 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update
                          .ThenInclude(x => x.Group)
                 .FirstOrDefaultAsync(s => s.Id == request.dto.Id && s.Status != Status.Deleted, cancellationToken) ?? throw new NotFoundException("Submission Answer topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != submissionAnswer.Submission.Test.Group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != submissionAnswer.Submission.Test.Group.LearningCenterId)
                 throw new ForbiddenException("Siz Submission Answerni yangilash uchun ruxsatga ega emassiz");
 
             if(request.dto.QuestionNumber.HasValue)

@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
 using NatijaUz.Domain.Entity;
-using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Errors.Model;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.TestService.Dtos;
@@ -31,7 +32,7 @@ namespace NatijaUz.Application.Services.TestService.Commands.Create
             if (group == null)
                 throw new NotFoundException("Guruh topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi guruhga test qo'sha olasiz");
 
             var test = new Test

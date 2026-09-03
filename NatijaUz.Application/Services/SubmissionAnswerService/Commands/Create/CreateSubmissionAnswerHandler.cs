@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
 using NatijaUz.Domain.Entity;
-using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Errors.Model;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.SubmissionAnswerService.Dtos;
@@ -29,7 +30,7 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Create
                 .Include(x => x.Student)
                 .FirstOrDefaultAsync(s => s.Id == request.dto.SubmissionId, cancellation) ?? throw new NotFoundException("Submission topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != submission.Student.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != submission.Student.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi guruhga Submission qo'sha olasiz");
 
             var submissionAnswer = new SubmissionAnswer

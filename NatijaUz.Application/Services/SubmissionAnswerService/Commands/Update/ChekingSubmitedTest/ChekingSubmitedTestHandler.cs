@@ -2,7 +2,9 @@
 using NatijaUz.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Infrastructure.Common;
 using NatijaUz.Infrastructure.Persistence;
+using NatijaUz.Application.Common.Messages;
 using NatijaUz.Application.Auth.AccountService;
 
 namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update.ChekingSubmitedTest
@@ -11,10 +13,12 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update.
     {
         private readonly AppDbContext _context;
         private readonly IAccountService _service;
-        public ChekingSubmitedTestHandler(AppDbContext context, IAccountService service)
+        private readonly IMessagePublisher _publisher;
+        public ChekingSubmitedTestHandler(AppDbContext context, IAccountService service, IMessagePublisher publisher)
         {
             _context = context;
             _service = service;
+            _publisher = publisher;
         }
         public async Task<bool> Handle(ChekingSubmitedTestCommand request, CancellationToken cancellation)
         {
@@ -28,6 +32,12 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Update.
 
             submission.SubmissionStatus = SubmissionStatus.Submitted;
             await _context.SaveChangesAsync(cancellation);
+
+            await _publisher.PublishAsync(
+                new SubmissionSubmittedMessage(submission.Id),
+                "ocr-processing-queue",
+                cancellation);
+
             return true;
         }
     }

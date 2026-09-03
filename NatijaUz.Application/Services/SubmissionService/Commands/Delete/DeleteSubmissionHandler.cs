@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
+using NatijaUz.Application.Common;
 using SendGrid.Helpers.Errors.Model;
+using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 
@@ -32,7 +33,7 @@ namespace NatijaUz.Application.Services.SubmissionService.Commands.Delete
 
             var student = await _context.Users.FirstOrDefaultAsync(x => x.Id == submission.StudentId && x.Status != Status.Deleted, cancellation) ?? throw new NotFoundException("Talaba topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != submission.Test.Group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != submission.Test.Group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi topshiriqni o'chira olasiz");
 
             submission.Status = Domain.Enums.Status.Deleted;

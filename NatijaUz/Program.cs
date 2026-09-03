@@ -1,17 +1,38 @@
+using RabbitMQ.Client;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using NatijaUz.Infrastructure.Common;
 using Microsoft.AspNetCore.Authentication;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AuthService;
 using NatijaUz.Application.Auth.AccountService;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using NatijaUz.Application.Auth.Services.VerifyEmail.Services;
-using NatijaUz.Application.Services.UserService.Commands.Create;
 using NatijaUz.Application.Auth.Services.VerifyEmail.Interfaces;
+using NatijaUz.Application.Services.UserService.Commands.Create;
 using NatijaUz.Application.Services.UserService.Queries.GetList;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+//Docker - RabbitMQ ulanish
+builder.Services.AddSingleton<IConnection>(sp =>
+{
+    var factory = new ConnectionFactory
+    {
+        HostName = "localhost",
+        UserName = "admin",
+        Password = "admin123"
+    };
+    return factory.CreateConnectionAsync().GetAwaiter().GetResult();
+});
+
+builder.Services.AddSingleton<IChannel>(sp =>
+{
+    var connection = sp.GetRequiredService<IConnection>();
+    return connection.CreateChannelAsync().GetAwaiter().GetResult();
+});
+
+builder.Services.AddSingleton<IMessagePublisher, RabbitMqPublisher>();
 
 // PostgreSQL ulanish
 builder.Services.AddDbContext<AppDbContext>(options =>

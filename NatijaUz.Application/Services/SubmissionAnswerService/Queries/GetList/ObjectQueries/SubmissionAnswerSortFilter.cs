@@ -1,6 +1,6 @@
 ﻿using NatijaUz.Application.Services.SubmissionAnswerService.Dtos;
 
-namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.ObjectQueries
+namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList.ObjectQueries
 {
     public static class SubmissionAnswerSortFilter
     {

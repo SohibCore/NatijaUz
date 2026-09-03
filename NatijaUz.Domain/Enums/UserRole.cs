@@ -5,6 +5,7 @@
         Student,
         Teacher,
         SysAdmin,
-        CenterAdmin
+        CenterAdmin,
+        Owner
     }
 }

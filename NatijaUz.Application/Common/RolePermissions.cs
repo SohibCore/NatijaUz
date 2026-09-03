@@ -8,8 +8,14 @@ namespace NatijaUz.Application.Common
         {
             { UserRole.SysAdmin, new[] { UserRole.SysAdmin, UserRole.CenterAdmin, UserRole.Teacher, UserRole.Student } },
             { UserRole.CenterAdmin, new[] { UserRole.Teacher, UserRole.Student } },
+
+            { UserRole.Owner, new[] { UserRole.CenterAdmin, UserRole.Teacher, UserRole.Student } }
         };
 
         public static bool CanManage(UserRole creatorRole, UserRole targetRole) => AllowedToCreate.TryGetValue(creatorRole, out var allowed) && allowed.Contains(targetRole);
+
+
+        private static readonly UserRole[] CenterManagerRoles = { UserRole.CenterAdmin, UserRole.Owner };
+        public static bool IsCenterManager(UserRole role) => CenterManagerRoles.Contains(role);
     }
 }

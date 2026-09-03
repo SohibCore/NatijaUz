@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
+using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Errors.Model;
 using NatijaUz.Infrastructure.Persistence;
@@ -28,7 +29,7 @@ namespace NatijaUz.Application.Services.TestService.Commands.Update
                 .Include(x => x.Group)
                 .FirstOrDefaultAsync(x => x.Id == request.dto.Id && x.Status != Status.Deleted, cancellation) ?? throw new NotFoundException("Test topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != test.Group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != test.Group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi testni yangilay olasiz");
 
             var hasSubmissions = await _context.Submissions.AnyAsync(x => x.TestId == test.Id && x.Status != Status.Deleted, cancellation);

@@ -31,6 +31,11 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetById
                 case UserRole.SysAdmin:
                     break;
 
+                case UserRole.Owner:
+                    if (_service.LearningCenterId != submissionAnswer.Submission.Test.Group.LearningCenterId)
+                        throw new ForbiddenException("Faqat o'z markazingizdagi testni ko'ra olasiz");
+                    break;
+
                 case UserRole.CenterAdmin:
                     if (_service.LearningCenterId != submissionAnswer.Submission.Test.Group.LearningCenterId)
                         throw new ForbiddenException("Faqat o'z markazingizdagi testni ko'ra olasiz");

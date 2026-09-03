@@ -1,10 +1,11 @@
 ﻿using MediatR;
-using NatijaUz.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using SendGrid.Helpers.Errors.Model;
-using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.SubmissionService.Dtos;
+using NatijaUz.Domain.Entity;
+using NatijaUz.Domain.Enums;
+using NatijaUz.Infrastructure.Persistence;
+using SendGrid.Helpers.Errors.Model;
 
 namespace NatijaUz.Application.Services.SubmissionService.Queries.GetById
 {
@@ -35,9 +36,16 @@ namespace NatijaUz.Application.Services.SubmissionService.Queries.GetById
 
             var test = await _context.Tests.Include(x => x.Group).SingleOrDefaultAsync(x => x.Id == submission.TestId, cancellationToken) ?? throw new NotFoundException("Test topilmadi");
 
+            var learningCenter = await _context.LearningCenters.SingleOrDefaultAsync(x => x.Id == test.Group.LearningCenterId, cancellationToken) ?? throw new NotFoundException("Markaz topilmadi");
+
             switch (_service.Role)
             {
                 case UserRole.SysAdmin:
+                    break;
+
+                case UserRole.Owner:
+                    if (_service.LearningCenterId != learningCenter.Id)
+                        throw new ForbiddenException("Faqat o'z markazingizdagi testni ko'ra olasiz");
                     break;
 
                 case UserRole.CenterAdmin:

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.SubmissionAnswerService.Dtos;
-using NatijaUz.Application.Services.SubmissionAnswerService.Queries.ObjectQueries;
+using NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList.ObjectQueries;
 
 namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList
 {
@@ -27,6 +27,8 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Queries.GetList
             query = _service.Role switch
             {
                 UserRole.SysAdmin => query,
+
+                UserRole.Owner => query.Where(x => x.Submission.Test.Group.LearningCenterId == _service.LearningCenterId),
 
                 UserRole.CenterAdmin => query.Where(x => x.Submission.Test.Group.LearningCenterId == _service.LearningCenterId),
 

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
+using NatijaUz.Application.Common;
 using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Errors.Model;
 using NatijaUz.Infrastructure.Persistence;
@@ -29,7 +30,7 @@ namespace NatijaUz.Application.Services.SubmissionAnswerService.Commands.Delete
                          .ThenInclude(x => x.Group)
                 .FirstOrDefaultAsync(x => x.Id == request.Id && x.Status != Status.Deleted, cancellationToken) ?? throw new NotFoundException("Submission Answer topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != submissionAnswer.Submission.Test.Group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != submissionAnswer.Submission.Test.Group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi Submission Answerni o'chira olasiz");
 
             submissionAnswer.Status = Status.Deleted;

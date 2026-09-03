@@ -1,8 +1,9 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
 using NatijaUz.Domain.Entity;
-using Microsoft.EntityFrameworkCore;
+using NatijaUz.Application.Common;
 using SendGrid.Helpers.Errors.Model;
+using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.SubmissionService.Dtos;
@@ -32,7 +33,7 @@ namespace NatijaUz.Application.Services.SubmissionService.Commands.Create
             var student = await _context.Users
                 .FirstOrDefaultAsync(x => x.Id == request.dto.StudentId, cancellation) ?? throw new NotFoundException("Student topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != test.Group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != test.Group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi guruhga topshiriq qo'sha olasiz");
 
             var submission = new Submission

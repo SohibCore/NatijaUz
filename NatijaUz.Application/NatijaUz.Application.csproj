@@ -26,6 +26,8 @@
     <Folder Include="Services\LearningCenterService\Commands\Delete\" />
     <Folder Include="Services\LearningCenterService\Commands\Update\" />
     <Folder Include="Services\LearningCenterService\Queries\" />
+    <Folder Include="Services\PendingLearningCenterRequestService\Commands\Create\" />
+    <Folder Include="Services\PendingLearningCenterRequestService\Queries\" />
   </ItemGroup>
 
 </Project>

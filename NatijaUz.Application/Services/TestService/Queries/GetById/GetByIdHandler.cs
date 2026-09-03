@@ -31,11 +31,18 @@ namespace NatijaUz.Application.Services.TestService.Queries.GetById
                     IsActive = x.IsActive,
                     QuestionCount = x.QuestionCount,
                 }).FirstOrDefaultAsync(cancellation) ?? throw new NotFoundException("Test topilmadi");
-            
+
             var group = await _context.Groups.SingleOrDefaultAsync(x => x.Id == test.GroupId && x.Status != Status.Deleted, cancellation) ?? throw new NotFoundException("Guruh topilmadi");
+
+            var learningCenter = await _context.LearningCenters.SingleOrDefaultAsync(x => x.Id == _service.LearningCenterId, cancellation) ?? throw new NotFoundException("Markaz topilmadi");
 
             switch (_service.Role)
             {
+                case UserRole.Owner:
+                    if (_service.LearningCenterId != learningCenter.Id)
+                        throw new ForbiddenException("Faqat o'z markazingizdagi testni ko'ra olasiz");
+                    break;
+
                 case UserRole.SysAdmin:
                     break;
 

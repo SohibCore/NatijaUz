@@ -30,6 +30,8 @@ namespace NatijaUz.Application.Services.SubmissionService.Queries.GetList
             {
                 UserRole.SysAdmin => query,
 
+                UserRole.Owner => query.Where(x => x.Test.Group.LearningCenter.OwnerId == _service.UserId),
+
                 UserRole.CenterAdmin => query.Where(x => x.Test.Group.LearningCenterId == _service.LearningCenterId),
 
                 UserRole.Teacher => query.Where(x => x.Test.Group.TeacherId == _service.UserId),

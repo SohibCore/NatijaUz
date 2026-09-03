@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using NatijaUz.Domain.Enums;
+using NatijaUz.Application.Common;
 using SendGrid.Helpers.Errors.Model;
 using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
@@ -31,7 +32,7 @@ namespace NatijaUz.Application.Services.TestService.Commands.Delete
             if (group == null)
                 throw new NotFoundException("Guruh topilmadi");
 
-            if (_service.Role == UserRole.CenterAdmin && _service.LearningCenterId != group.LearningCenterId)
+            if (RolePermissions.IsCenterManager(_service.Role) && _service.LearningCenterId != group.LearningCenterId)
                 throw new ForbiddenException("Faqat o'z markazingizdagi testni o'chira olasiz");
 
             test.Status = Status.Deleted;

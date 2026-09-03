@@ -1,13 +1,17 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Common;
 using NatijaUz.Application.Services.LearningCenterService.Dtos;
 using NatijaUz.Domain.Entity;
+using NatijaUz.Domain.Enums;
 using NatijaUz.Infrastructure.Persistence;
+using SendGrid.Helpers.Errors.Model;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NatijaUz.Application.Services.LearningCenterService.Commands.Create
 {
-    /*public class CreateLearningCenterHandler : IRequestHandler<CreateLearningCenterCommand, LearningCenterDto>
+    public class CreateLearningCenterHandler : IRequestHandler<CreateLearningCenterCommand, LearningCenterDto>
     {
         private readonly AppDbContext _context;
         private readonly IAccountService _service;
@@ -18,13 +22,7 @@ namespace NatijaUz.Application.Services.LearningCenterService.Commands.Create
         }
         public async Task<LearningCenterDto> Handle(CreateLearningCenterCommand request, CancellationToken cancel)
         {
-            if (_service.Role != Domain.Enums.UserRole.SysAdmin)
-                throw new Exception("Siz ushbu O'quv Markazni yarata olmaysiz");
 
-            var learningCenter = new LearningCenter
-            {
-
-            }
         }
-    }*/
+    }
 }
