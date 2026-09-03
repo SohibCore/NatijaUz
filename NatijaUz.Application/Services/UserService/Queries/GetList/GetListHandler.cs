@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.UserService.Dtos;
-using NatijaUz.Application.Services.UserService.Queries.ObjectQueries;
+using NatijaUz.Application.Services.UserService.Queries.GetList.ObjectQueries;
 
 namespace NatijaUz.Application.Services.UserService.Queries.GetList
 {

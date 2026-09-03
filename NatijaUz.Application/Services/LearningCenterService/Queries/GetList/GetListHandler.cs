@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using NatijaUz.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.LearningCenterService.Dtos;
-using NatijaUz.Domain.Enums;
-using NatijaUz.Infrastructure.Persistence;
-using SendGrid.Helpers.Errors.Model;
+using NatijaUz.Application.Services.LearningCenterService.Queries.GetList.ObjectQueries;
 
 namespace NatijaUz.Application.Services.LearningCenterService.Queries.GetList
 {
@@ -45,16 +46,7 @@ namespace NatijaUz.Application.Services.LearningCenterService.Queries.GetList
                     Address = x.Address,
                     PhoneNumber = x.PhoneNumber,
                     OwnerId = x.OwnerId,
-                    Owner = new UserService.Dtos.UserDto
-                    {
-                        Id = x.Owner.Id,
-                        UserName = x.Owner.UserName,
-                        FullName = x.Owner.FullName,
-                        PhoneNumber = x.Owner.PhoneNumber,
-                        Role = x.Owner.Role,
-                        LearningCenterId = x.Owner.LearningCenterId
-                    }
-                })
+                }).SortFilter(request.filter)
                 .ToListAsync(cancellation);
         }
     }

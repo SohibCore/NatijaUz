@@ -1,6 +1,6 @@
 ﻿using NatijaUz.Application.Services.UserService.Dtos;
 
-namespace NatijaUz.Application.Services.UserService.Queries.ObjectQueries
+namespace NatijaUz.Application.Services.UserService.Queries.GetList.ObjectQueries
 {
     public static class UserSortFilter
     {
