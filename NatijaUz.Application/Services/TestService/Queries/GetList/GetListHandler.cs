@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using NatijaUz.Infrastructure.Persistence;
 using NatijaUz.Application.Auth.AccountService;
 using NatijaUz.Application.Services.TestService.Dtos;
-using NatijaUz.Application.Services.TestService.Queries.ObjectQueries;
+using NatijaUz.Application.Services.TestService.Queries.GetList.ObjectQueries;
 
 namespace NatijaUz.Application.Services.TestService.Queries.GetList
 {

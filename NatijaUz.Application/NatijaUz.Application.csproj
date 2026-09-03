@@ -26,7 +26,6 @@
     <Folder Include="Services\LearningCenterService\Commands\Delete\" />
     <Folder Include="Services\LearningCenterService\Commands\Update\" />
     <Folder Include="Services\LearningCenterService\Queries\" />
-    <Folder Include="Services\SubmissionService\Queries\" />
   </ItemGroup>
 
 </Project>

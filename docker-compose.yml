@@ -1,0 +1,10 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: natijauz-rabbitmq
+    ports:
+      - "5672:5672"     # AMQP porti - .NET ilovang shu bilan ulanadi
+      - "15672:15672"   # Management UI porti
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123

@@ -1,6 +1,6 @@
 ﻿using NatijaUz.Application.Services.TestService.Dtos;
 
-namespace NatijaUz.Application.Services.TestService.Queries.ObjectQueries
+namespace NatijaUz.Application.Services.TestService.Queries.GetList.ObjectQueries
 {
     public static class TestSortFilter
     {
