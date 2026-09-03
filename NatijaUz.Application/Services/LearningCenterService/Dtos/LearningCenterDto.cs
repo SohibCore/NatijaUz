@@ -1,6 +1,4 @@
-﻿using NatijaUz.Domain.Enums;
-
-namespace NatijaUz.Application.Services.LearningCenterService.Dtos
+﻿namespace NatijaUz.Application.Services.LearningCenterService.Dtos
 {
     public class LearningCenterDto
     {
@@ -8,6 +6,6 @@ namespace NatijaUz.Application.Services.LearningCenterService.Dtos
         public string Name { get; set; } = null!;
         public string Address { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
-        public long OwnerUserId { get; set; } 
+        public long OwnerId { get; set; }
     }
 }

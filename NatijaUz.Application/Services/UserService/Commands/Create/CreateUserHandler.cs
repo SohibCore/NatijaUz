@@ -30,8 +30,8 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create
                     throw new Exception("Faqat o'z markazingizga foydalanuvchi qo'sha olasiz");
             }
 
-            if (request.dto.Role == UserRole.Student)
-                request.dto.LearningCenterId = null;
+            if (RolePermissions.IsCenterManager(_service.Role))
+                request.dto.LearningCenterId = _service.LearningCenterId;
 
             if (await _context.Users.AnyAsync(x => x.PhoneNumber == request.dto.PhoneNumber, cancellation))
                 throw new ValidationException($"Bu raqam band - {request.dto.PhoneNumber}");
@@ -45,8 +45,8 @@ namespace NatijaUz.Application.Services.UserService.Commands.Create
                 FullName = request.dto.FullName,
                 PhoneNumber = request.dto.PhoneNumber,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.dto.Password),
-                Role = UserRole.Student,
-                LearningCenterId = 0,
+                Role = request.dto.Role,
+                LearningCenterId = request.dto.LearningCenterId,
                 Status = Status.Created,
 
                 CreatedAt = DateTime.UtcNow,
